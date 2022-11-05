@@ -1,23 +1,24 @@
 package list
 
 import (
+	"errors"
 	"fmt"
 )
 
-// LinkedList implements the Singly Linked list
-type LinkedList struct {
+// SList implements the Singly Linked list
+type SList struct {
 	head *SNode
 }
 
-// NewLinkedList is a factory method for creating a new LinkedList
-func NewLinkedList(h *SNode) *LinkedList {
-	return &LinkedList{
+// NewLinkedList is a factory method for creating a new SList
+func NewLinkedList(h *SNode) *SList {
+	return &SList{
 		head: h,
 	}
 }
 
 // Show Pretty prints a linked list
-func (l *LinkedList) Show() {
+func (l *SList) Show() {
 	h := l.head
 	if h != nil {
 		fmt.Printf("%v ", h.data)
@@ -31,7 +32,7 @@ func (l *LinkedList) Show() {
 
 // InsertDataToHead creates a new node for data
 // to be added to front of linked list
-func (l *LinkedList) InsertDataToHead(newData interface{}) {
+func (l *SList) InsertDataToHead(newData interface{}) {
 	newNode := NewSNode(newData, nil)
 	newNode.next = l.head
 	l.head = newNode
@@ -39,6 +40,16 @@ func (l *LinkedList) InsertDataToHead(newData interface{}) {
 
 // InsertDataAfterFirstValue creates a new node for data
 // and inserts node after first instance of value is found
-func (l *LinkedList) InsertDataAfterFirstValue(v interface{}, newData interface{}) {
-	
+func (l *SList) InsertDataAfterFirstValue(v interface{}, newData interface{}) error {
+	h := l.head
+	newNode := NewSNode(newData, nil)
+	for h != nil {
+		if h.data == v {
+			newNode.next = h.next
+			h.next = newNode
+			return nil
+		}
+		h = h.next
+	}
+	return errors.New("value not found in list")
 }

@@ -16,9 +16,27 @@ func TestLinkedList_InsertToFront(t *testing.T) {
 	require.Equal(t, 3, a.head.next.next.next.data)
 }
 
-func createStarterList() *LinkedList {
+func TestSList_InsertDataAfterFirstValue(t *testing.T) {
+	a := createDupList()
+	a.Show()
+	err := a.InsertDataAfterFirstValue(2, 3)
+	a.Show()
+	require.Equal(t, 3, a.head.next.data)
+	require.NoError(t, err)
+	b := createDupList()
+	err2 := b.InsertDataAfterFirstValue(1, 4)
+	require.ErrorContains(t, err2, "value not found in list")
+}
+
+func createStarterList() *SList {
 	a := NewSNode(1, nil)
 	a.next = NewSNode(2, nil)
 	a.next.next = NewSNode(3, nil)
+	return NewLinkedList(a)
+}
+
+func createDupList() *SList {
+	a := NewSNode(2, nil)
+	a.next = NewSNode(2, nil)
 	return NewLinkedList(a)
 }
