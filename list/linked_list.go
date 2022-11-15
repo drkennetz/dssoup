@@ -23,11 +23,14 @@ func (l *SList) Show() {
 	if h != nil {
 		fmt.Printf("%v ", h.data)
 		h = h.next
+	} else {
+		fmt.Printf("list has no data")
 	}
 	for h != nil {
 		fmt.Printf("-> %v ", h.data)
 		h = h.next
 	}
+	fmt.Println("")
 }
 
 // InsertDataToHead creates a new node for data
@@ -52,4 +55,18 @@ func (l *SList) InsertDataAfterFirstValue(v interface{}, newData interface{}) er
 		h = h.next
 	}
 	return errors.New("value not found in list")
+}
+
+// Append adds a node to the end of a linked list
+func (l *SList) Append(newData interface{}) {
+	newNode := NewSNode(newData, nil)
+	if l.head == nil {
+		l.head = newNode
+		return
+	}
+	h := l.head
+	for h.next != nil {
+		h = h.next
+	}
+	h.next = newNode
 }
