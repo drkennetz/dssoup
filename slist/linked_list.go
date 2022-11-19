@@ -82,21 +82,3 @@ func (l *SList[N]) Append(newData N) {
 	h.next = newNode
 	l.count = l.count + 1
 }
-
-// MergeSort MergeSorts a linked list
-//  1. if the size of the linked list is 1 then return the head
-//  2. Find mid using the tortoise and hare approach
-//  3. Store the next of mid in head2 IE right sub-linked list
-//  4. make the next midpoint null
-//  5. recursively call MergeSort on both left and right sub
-//     and store new head of left and right linked list
-//  6. call merge() given the arguments new heads of left and right
-//     sub lists and store the final head returned after merging
-//  7. Return the final head of the merged linked list
-func MergeSort() {}
-
-// merge merges 2 linked lists
-func merge() {}
-
-// findMid finds the middle of a linked list
-func findMid() {}
